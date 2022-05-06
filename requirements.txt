@@ -1,1 +1,3 @@
 fastapi==0.76.0
+fastapi_login==1.8.0
+pymongo==4.1.1
