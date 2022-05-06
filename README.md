@@ -10,3 +10,5 @@ To update requirements.text, run the following commands in your terminal:
 
 > pipreqs
 ```
+
+View the API's documentation by going to `http://127.0.0.1:8000/docs` after starting the server. 
