@@ -1,6 +1,6 @@
 # senlaw
 
-**MAKE SURE TO USE PYTHON 3.10 AND ABOVE**
+**MAKE SURE TO USE PYTHON 3.10 OR ABOVE**
 
 Install requirements by running `pip install -r requirements.txt`
 
@@ -15,4 +15,4 @@ To update requirements.text, run the following commands in your terminal:
 
 View the API's documentation by going to **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)** after starting the server. 
 
-Use [Insomnia](https://insomnia.rest/download) to test the API using it's Swagger doucmentation.
+Use [Insomnia](https://insomnia.rest/download) or test the API using it's inbuilt Swagger documentation.
