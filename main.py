@@ -24,10 +24,12 @@ SECRET = "fcd6a76a409c0c785074f63d617b16b0a5a148534c1dbb33"
 
 manager = LoginManager(SECRET, '/login')
 
+
 @manager.user_loader()
 def query_user(username: str):
     user = users.find_one({"username": username})
     return user
+
 
 @app.post('/login', status_code=200)
 def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
@@ -48,6 +50,7 @@ def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
 
     return {'access_token': access_token}
 
+
 # @app.post('/signup')
 
 # --- Routes ---
@@ -55,4 +58,4 @@ def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
 
 @app.get("/")
 def root():
-    return {"message": "Hello World"}
+    return "wow!"
