@@ -44,6 +44,7 @@ def is_safe_url(target):
     return test_url.scheme in ('http', 'https') and \
            ref_url.netloc == test_url.netloc
 
+
 @app.route("/login", methods=["POST"])
 def login():
     username = request.json.get("username")
@@ -72,6 +73,7 @@ def login():
 @login_required
 def test():
     return f"Hello, {current_user.username}"
+
 
 """
 manager = LoginManager(SECRET, '/login')
@@ -103,6 +105,4 @@ def login(response: Response, data: OAuth2PasswordRequestForm = Depends()):
     return {'access_token': access_token}
 """
 
-
 # --- Routes ---
-
