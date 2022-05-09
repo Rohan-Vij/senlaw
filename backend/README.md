@@ -2,7 +2,7 @@
 
 Install requirements by running `pip install -r requirements.txt`
 
-Run with `flask run --reload` (development environment). Uses OAuth2.
+Run with `python -m flask run --reload` (development environment). Uses OAuth2.
 
 To update requirements.text, run the following commands in your terminal:
 ```python
