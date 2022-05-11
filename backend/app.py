@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, create_refresh_token
 
 import pymongo
+from bson.objectid import ObjectId
 
 # create app & register login manager
 app = Flask(__name__)
@@ -21,6 +22,7 @@ client = pymongo.MongoClient(
     "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/senlaw?retryWrites=true&w=majority")
 db = client["senlaw"]
 users = db["users"]
+lawyer_posts = db["lawyer_posts"]
 
 # --- User Management ---
 
@@ -81,6 +83,43 @@ def logout():
     return jsonify({"message": "Logged out"}), 200
 
 # --- Routes ---
+
+@app.route("/lawyers/create", methods=["POST"])
+@jwt_required
+def create_lawyer():
+    username = request.json.get("username", None)
+    type_of_service = request.json.get("type", None)
+    description = request.json.get("description", None)
+
+    _id = lawyer_posts.insert_one(
+        {"username": username, "service": type_of_service, "description": description}).inserted_id
+
+    return jsonify({"message": "Success", "id": _id}), 200
+
+@app.route("/lawyers/delete", methods=["DELETE"])
+@jwt_required
+def delete_lawyer():
+    username = request.json.get("username", None)
+    _id = request.json.get("id", None)
+
+    find = lawyer_posts.find({"_id" : ObjectId(_id)})
+
+    exists = True if find else False
+
+    if not exists:
+        return jsonify({"message": "That post does not exist"}), 404
+
+    same_user = True if find["username"] == username else False
+
+    if not same_user:
+        return jsonify({"message": "You do not own this post"}), 403
+    
+    lawyer_posts.delete_one({"_id" : ObjectId(_id)})
+
+    return jsonify({"message": "Success"}), 200
+
+
+
 
 
 if __name__ == "__main__":
