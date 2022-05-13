@@ -76,7 +76,7 @@ def refresh():
 
 
 @app.route("/logout", methods=["POST"])
-@jwt_required
+@jwt_required()
 def logout():
     # Maybe revoke a refresh token? I don't know if this could negatively affect older users
     # Maybe it's worth a try if we have more time
@@ -85,7 +85,7 @@ def logout():
 # --- Routes ---
 
 @app.route("/lawyers/create", methods=["POST"])
-@jwt_required
+@jwt_required()
 def create_lawyer():
     username = request.json.get("username", None)
     type_of_service = request.json.get("type", None)
@@ -97,7 +97,7 @@ def create_lawyer():
     return jsonify({"message": "Success", "id": _id}), 200
 
 @app.route("/lawyers/delete", methods=["DELETE"])
-@jwt_required
+@jwt_required()
 def delete_lawyer():
     username = request.json.get("username", None)
     _id = request.json.get("id", None)
