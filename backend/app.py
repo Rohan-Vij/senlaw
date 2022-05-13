@@ -84,17 +84,20 @@ def logout():
 
 # --- Routes ---
 
+
 @app.route("/lawyers/create", methods=["POST"])
 @jwt_required()
 def create_lawyer():
     username = request.json.get("username", None)
+    title = request.json.get("title", None)
     type_of_service = request.json.get("type", None)
     description = request.json.get("description", None)
 
     _id = lawyer_posts.insert_one(
-        {"username": username, "service": type_of_service, "description": description}).inserted_id
+        {"username": username, "title": title, "service": type_of_service, "description": description}).inserted_id
 
     return jsonify({"message": "Success", "id": _id}), 200
+
 
 @app.route("/lawyers/delete", methods=["DELETE"])
 @jwt_required()
@@ -102,7 +105,7 @@ def delete_lawyer():
     username = request.json.get("username", None)
     _id = request.json.get("id", None)
 
-    find = lawyer_posts.find({"_id" : ObjectId(_id)})
+    find = lawyer_posts.find({"_id": ObjectId(_id)})
 
     exists = True if find else False
 
@@ -113,11 +116,47 @@ def delete_lawyer():
 
     if not same_user:
         return jsonify({"message": "You do not own this post"}), 403
-    
-    lawyer_posts.delete_one({"_id" : ObjectId(_id)})
+
+    lawyer_posts.delete_one({"_id": ObjectId(_id)})
 
     return jsonify({"message": "Success"}), 200
 
+
+@app.route("/lawyers/update", methods=["PUT"])
+@jwt_required()
+def update_lawyer():
+    username = request.json.get("username", None)
+    _id = request.json.get("id", None)
+
+    title = request.json.get("title", None)
+    type_of_service = request.json.get("type", None)
+    description = request.json.get("description", None)
+
+    find = lawyer_posts.find({"_id": ObjectId(_id)})
+
+    exists = True if find else False
+
+    if not exists:
+        return jsonify({"message": "That post does not exist"}), 404
+
+    same_user = True if find["username"] == username else False
+
+    if not same_user:
+        return jsonify({"message": "You do not own this post"}), 403
+
+    lawyer_posts.find_one_and_update({"_id": _id},
+                                     {"$set": {"username": username, "title": title, "service": type_of_service, "description": description}})
+
+    return jsonify({"message": "Success"}), 200
+
+@app.route("/lawyers/viewmine")
+@jwt_required()
+def viewmine_lawyer():
+    username = request.json.get("username", None)
+
+    posts_find = list(lawyer_posts.find({"username": username}))
+
+    return jsonify({"message": "Success", "posts": posts_find}), 200
 
 
 
