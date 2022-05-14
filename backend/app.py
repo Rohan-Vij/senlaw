@@ -42,11 +42,11 @@ def login():
 
     if not user:
         return jsonify({"message": "User not found"}), 404
-    elif username != "test" or password != "test":
-        return jsonify({"msg": "Incorrect username or password"}), 401
+    elif password != user["password"]:
+        return jsonify({"msg": "Incorrect or password"}), 401
 
-    access_token = create_access_token(identity=str(user._id))
-    refresh_token = create_refresh_token(identity=str(user._id))
+    access_token = create_access_token(identity=str(user["_id"]))
+    refresh_token = create_refresh_token(identity=str(user["_id"]))
     return jsonify(access_token=access_token, refresh_token=refresh_token), 200
 
 
