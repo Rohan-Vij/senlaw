@@ -1,8 +1,10 @@
+'''Main entrypoint file for the API.'''
 from datetime import timedelta
 
 from flask import Flask, jsonify, request
 
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, create_refresh_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from flask_jwt_extended import create_refresh_token
 
 import pymongo
 from bson.objectid import ObjectId
@@ -19,7 +21,8 @@ jwt = JWTManager(app)
 
 # login to db
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/senlaw?retryWrites=true&w=majority")
+    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"/
+    "senlaw?retryWrites=true&w=majority")
 db = client["senlaw"]
 users = db["users"]
 lawyer_posts = db["lawyer_posts"]
@@ -28,6 +31,13 @@ lawyer_posts = db["lawyer_posts"]
 
 
 def query_user(username: str):
+    """
+    Query the database for a user with the given username.
+
+    :param username: The username to search for.
+
+    :return: The user if found, None otherwise.
+    """
     user = users.find_one({"username": username})
     print(user)
     return None if not user else user
@@ -35,6 +45,11 @@ def query_user(username: str):
 
 @app.route("/login", methods=["POST"])
 def login():
+    """
+    Login a user.
+
+    :return: A JWT access token if the user is found, an error otherwise.
+    """
     username = request.json.get("username", None)
     password = request.json.get("password", None)
 
@@ -52,6 +67,11 @@ def login():
 
 @app.route("/signup", methods=["POST"])
 def signup():
+    """
+    Signup a user.
+
+    :return: A JWT access token if the user is created, an error otherwise.
+    """
     username = request.json.get("username", None)
     password = request.json.get("password", None)
 
@@ -70,6 +90,11 @@ def signup():
 @app.route("/refresh", methods=["POST"])
 @jwt_required(refresh=True)
 def refresh():
+    """
+    Refresh a JWT access token.
+
+    :return: A JWT access token if the user is found and the token is valid, an error otherwise.
+    """
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity)
     return jsonify(access_token=access_token)
@@ -78,6 +103,11 @@ def refresh():
 @app.route("/logout", methods=["POST"])
 @jwt_required()
 def logout():
+    """
+    Logout a user. (not used)
+
+    :return: A message indicating the user has logged out.
+    """
     # Maybe revoke a refresh token? I don't know if this could negatively affect older users
     # Maybe it's worth a try if we have more time
     return jsonify({"message": "Logged out"}), 200
@@ -88,13 +118,23 @@ def logout():
 @app.route("/lawyers/create", methods=["POST"])
 @jwt_required()
 def create_lawyer():
+    """
+    Create a post of a lawyer/law firm's information.
+
+    :return: A message indicating the post was created and its id.
+    """
     username = request.json.get("username", None)
     title = request.json.get("title", None)
     type_of_service = request.json.get("type", None)
     description = request.json.get("description", None)
 
     _id = lawyer_posts.insert_one(
-        {"username": username, "title": title, "service": type_of_service, "description": description}).inserted_id
+        {
+            "username": username,
+            "title": title,
+            "service": type_of_service,
+            "description": description
+        }).inserted_id
 
     return jsonify({"message": "Success", "id": _id}), 200
 
@@ -102,6 +142,11 @@ def create_lawyer():
 @app.route("/lawyers/delete", methods=["DELETE"])
 @jwt_required()
 def delete_lawyer():
+    """
+    Delete a post of a lawyer/law firm's information.
+
+    :return: A message indicating the post was deleted.
+    """
     username = request.json.get("username", None)
     _id = request.json.get("id", None)
 
@@ -125,6 +170,11 @@ def delete_lawyer():
 @app.route("/lawyers/update", methods=["PUT"])
 @jwt_required()
 def update_lawyer():
+    """
+    Update a post of a lawyer/law firm's information.
+
+    :return: A message indicating the post was updated.
+    """
     username = request.json.get("username", None)
     _id = request.json.get("id", None)
 
@@ -145,20 +195,29 @@ def update_lawyer():
         return jsonify({"message": "You do not own this post"}), 403
 
     lawyer_posts.find_one_and_update({"_id": _id},
-                                     {"$set": {"username": username, "title": title, "service": type_of_service, "description": description}})
+                                     {"$set": {
+                                        "username": username,
+                                        "title": title,
+                                        "service": type_of_service,
+                                        "description": description}
+                                     })
 
     return jsonify({"message": "Success"}), 200
+
 
 @app.route("/lawyers/viewmine")
 @jwt_required()
 def viewmine_lawyer():
+    """
+    View all posts of a user.
+
+    :return: A list of posts.
+    """
     username = request.json.get("username", None)
 
     posts_find = list(lawyer_posts.find({"username": username}))
 
     return jsonify({"message": "Success", "posts": posts_find}), 200
-
-
 
 
 if __name__ == "__main__":
