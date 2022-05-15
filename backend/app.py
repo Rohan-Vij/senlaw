@@ -1,16 +1,18 @@
 '''Main entrypoint file for the API.'''
 from datetime import timedelta
 
-from flask import Flask, jsonify, request
-
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
-from flask_jwt_extended import create_refresh_token
-
 import pymongo
 from bson.objectid import ObjectId
 
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from flask_jwt_extended import (JWTManager, create_access_token,
+                                create_refresh_token, get_jwt_identity,
+                                jwt_required)
+
 # create app & register login manager
 app = Flask(__name__)
+CORS(app)
 
 app.config["SECRET_KEY"] = "fcd6a76a409c0c785074f63d617b16b0a5a148534c1dbb33"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
