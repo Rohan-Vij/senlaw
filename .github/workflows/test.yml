@@ -1,0 +1,24 @@
+name: SenLaw API CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  Linux:
+    name: Validate API spec
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - uses: kong/setup-inso@v1
+        with:
+          inso-version: 2.4.0
+          
+      - name: Run test suites
+        run: inso run test "SenLaw" --env SenLaw --ci
