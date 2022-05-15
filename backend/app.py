@@ -23,7 +23,7 @@ jwt = JWTManager(app)
 
 # login to db
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"\
+    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"
     "senlaw?retryWrites=true&w=majority")
 db = client["senlaw"]
 users = db["users"]
@@ -198,11 +198,11 @@ def update_lawyer():
 
     lawyer_posts.find_one_and_update({"_id": _id},
                                      {"$set": {
-                                        "username": username,
-                                        "title": title,
-                                        "service": type_of_service,
-                                        "description": description}
-                                     })
+                                         "username": username,
+                                         "title": title,
+                                         "service": type_of_service,
+                                         "description": description}
+                                      })
 
     return jsonify({"message": "Success"}), 200
 
@@ -218,6 +218,19 @@ def viewmine_lawyer():
     username = request.json.get("username", None)
 
     posts_find = list(lawyer_posts.find({"username": username}))
+
+    return jsonify({"message": "Success", "posts": posts_find}), 200
+
+
+@app.route("/lawyers/all")
+@jwt_required()
+def view_all():
+    """
+    View all posts.
+
+    :return: A list of posts.
+    """
+    posts_find = list(lawyer_posts.find())
 
     return jsonify({"message": "Success", "posts": posts_find}), 200
 
