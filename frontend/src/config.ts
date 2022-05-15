@@ -1,4 +1,4 @@
-export const endpoint = "http://localhost:5000";
+export const endpoint = "http://192.168.86.25:5000";
 
 export type RootStackParamList = {
   Home: undefined;

@@ -2,6 +2,8 @@
 
 NOTE: This uses `tailwind-rn`, so in development, make two terminals, one running `npm run dev:tailwind`, and the other running `npm run android` (or `ios`). **MAKE SURE TO RELOAD EVERY TIME YOU SEE THE ERROR "Unsupported Tailwind class" (press `r`)!!**
 
+## NOTE: MAKE SURE TO CHANGE THE IP ADDRESS IN `src/config.ts` TO YOURS!!
+
 Commands to run (for my reference; run these in seperate terminals)
 
 ```ps

@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Home = ({ navigation }: Props) => {
-  return <Text>balls</Text>;
+  return <Text>home</Text>;
 };
 
 export default Home;
