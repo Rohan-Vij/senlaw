@@ -25,18 +25,20 @@ const Login = ({ navigation }: Props) => {
 
   const login = async () => {
     let result;
-    console.log(endpoint);
     try {
-      result = await axios.post(endpoint + "/login", {
+      console.log(username, password, endpoint + "/login");
+      result = axios.post(endpoint + "/login", {
         username: username,
         password: password,
-      });
+      }).then((val) => console.log(val));
+      console.log("DONE");
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return;
     }
+    console.log("lol");
 
-
+    /*
     if (result.status === 404) {
       setError("User wasn't found.");
       return;
@@ -45,8 +47,9 @@ const Login = ({ navigation }: Props) => {
       return;
     }
 
+    console.log(result.data);
     await AsyncStorage.setItem("user", { username, ...result.data });
-    navigation.navigate("Home");
+    navigation.navigate("Home");*/
   };
 
   useEffect(() => {
@@ -54,7 +57,7 @@ const Login = ({ navigation }: Props) => {
       if (await AsyncStorage.getItem("user")) {
         navigation.navigate("Login/Sign Up");
       }
-    })()
+    })();
   }, []);
 
   return (
@@ -85,7 +88,7 @@ const Login = ({ navigation }: Props) => {
         ></TextInput>
         <Pressable
           style={tailwind("bg-blue-500 p-2 rounded w-full mb-3")}
-          onPress={login}
+          onPress={() => login()}
         >
           <Text style={tailwind("text-white text-xl text-center")}>
             {!isSigningUp ? "Login" : "Sign Up"}
