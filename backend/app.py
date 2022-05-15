@@ -21,7 +21,7 @@ jwt = JWTManager(app)
 
 # login to db
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"/
+    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"\
     "senlaw?retryWrites=true&w=majority")
 db = client["senlaw"]
 users = db["users"]
