@@ -21,7 +21,7 @@ jwt = JWTManager(app)
 
 # login to db
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"/
+    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"\
     "senlaw?retryWrites=true&w=majority")
 db = client["senlaw"]
 users = db["users"]
@@ -57,7 +57,7 @@ def login():
 
     if not user:
         return jsonify({"message": "User not found"}), 404
-    elif password != user["password"]:
+    if password != user["password"]:
         return jsonify({"msg": "Incorrect or password"}), 401
 
     access_token = create_access_token(identity=str(user["_id"]))
@@ -152,12 +152,12 @@ def delete_lawyer():
 
     find = lawyer_posts.find({"_id": ObjectId(_id)})
 
-    exists = True if find else False
+    exists = bool(find)
 
     if not exists:
         return jsonify({"message": "That post does not exist"}), 404
 
-    same_user = True if find["username"] == username else False
+    same_user = find["username"] == username
 
     if not same_user:
         return jsonify({"message": "You do not own this post"}), 403
@@ -184,12 +184,12 @@ def update_lawyer():
 
     find = lawyer_posts.find({"_id": ObjectId(_id)})
 
-    exists = True if find else False
+    exists = bool(find)
 
     if not exists:
         return jsonify({"message": "That post does not exist"}), 404
 
-    same_user = True if find["username"] == username else False
+    same_user = find["username"] == username
 
     if not same_user:
         return jsonify({"message": "You do not own this post"}), 403
