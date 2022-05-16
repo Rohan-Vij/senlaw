@@ -18,7 +18,6 @@ type Props = {
 const Login = ({ navigation }: Props) => {
   const tailwind = useTailwind();
 
-  const [isSigningUp, setIsSigningUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,10 +25,11 @@ const Login = ({ navigation }: Props) => {
   const login = async () => {
     let result;
     try {
-      result = await axios.post(endpoint + "/login", {
-        username: username,
-        password: password,
-      });
+      result = await axios.post(
+        endpoint + "/login",
+        { username, password },
+        { validateStatus: () => true }
+      );
     } catch (e) {
       console.error(e);
       return;
@@ -43,7 +43,35 @@ const Login = ({ navigation }: Props) => {
       return;
     }
 
-    await AsyncStorage.setItem("user", JSON.stringify({ username, ...result.data }));
+    await AsyncStorage.setItem(
+      "user",
+      JSON.stringify({ username, ...result.data })
+    );
+    navigation.navigate("Home");
+  };
+
+  const signup = async () => {
+    let result;
+    try {
+      result = await axios.post(
+        endpoint + "/signup",
+        { username, password },
+        { validateStatus: () => true }
+      );
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+
+    if (result.status === 400) {
+      setError("Username already exists! Please pick another one, or login.");
+      return;
+    }
+
+    await AsyncStorage.setItem(
+      "user",
+      JSON.stringify({ username, ...result.data })
+    );
     navigation.navigate("Home");
   };
 
@@ -57,9 +85,7 @@ const Login = ({ navigation }: Props) => {
 
   return (
     <View style={tailwind("flex items-center justify-center h-full w-full")}>
-      <Text style={tailwind("text-4xl mb-4")}>
-        {!isSigningUp ? "Login" : "Sign Up"}
-      </Text>
+      <Text style={tailwind("text-4xl mb-4")}>Login/Sign Up</Text>
       <View style={tailwind("w-2/3")}>
         <TextInput
           placeholder="Username"
@@ -83,19 +109,16 @@ const Login = ({ navigation }: Props) => {
         ></TextInput>
         <Pressable
           style={tailwind("bg-blue-500 p-2 rounded w-full mb-3")}
-          onPress={() => login()}
+          onPress={login}
         >
-          <Text style={tailwind("text-white text-xl text-center")}>
-            {!isSigningUp ? "Login" : "Sign Up"}
-          </Text>
+          <Text style={tailwind("text-white text-xl text-center")}>Login</Text>
         </Pressable>
-        <Text style={tailwind("text-center mb-3 text-lg")}>or...</Text>
         <Pressable
           style={tailwind("bg-blue-500 p-2 rounded w-full")}
-          onPress={() => setIsSigningUp(!isSigningUp)}
+          onPress={signup}
         >
           <Text style={tailwind("text-white text-xl text-center")}>
-            {!isSigningUp ? "Sign Up" : "Login"}
+            Sign Up
           </Text>
         </Pressable>
         {error !== "" && (

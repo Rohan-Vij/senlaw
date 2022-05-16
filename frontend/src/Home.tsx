@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { Text } from "react-native";
+import { useTailwind } from "tailwind-rn/dist";
 import { RootStackParamList, UserAuth } from "./config";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const Home = ({ navigation }: Props) => {
+  const tailwind = useTailwind();
   const [auth, setAuth] = useState<null | UserAuth>();
 
   useEffect(() => {
@@ -27,10 +29,9 @@ const Home = ({ navigation }: Props) => {
     })();
   }, []);
 
-  return (
+  return !auth ? <Text style={tailwind("text-xl")}>Loading...</Text> : (
     <>
-      <Text>{auth?.username || "Loading..."}</Text>
-      <Text>{auth?.access_token || "Loading..."}</Text>
+      <Text style={tailwind("text-xl")}>Hello, {auth.username}</Text>
     </>
   );
 };
