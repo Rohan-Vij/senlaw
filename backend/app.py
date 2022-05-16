@@ -86,7 +86,8 @@ def signup():
         {"username": username, "password": password}).inserted_id
 
     access_token = create_access_token(identity=str(_id))
-    return jsonify(access_token=access_token), 200
+    refresh_token = create_refresh_token(identity=str(user["_id"]))
+    return jsonify(access_token=access_token, refresh_token=refresh_token), 200
 
 
 @app.route("/refresh", methods=["POST"])
