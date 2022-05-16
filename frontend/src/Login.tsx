@@ -26,19 +26,15 @@ const Login = ({ navigation }: Props) => {
   const login = async () => {
     let result;
     try {
-      console.log(username, password, endpoint + "/login");
-      result = axios.post(endpoint + "/login", {
+      result = await axios.post(endpoint + "/login", {
         username: username,
         password: password,
-      }).then((val) => console.log(val));
-      console.log("DONE");
+      });
     } catch (e) {
       console.error(e);
       return;
     }
-    console.log("lol");
 
-    /*
     if (result.status === 404) {
       setError("User wasn't found.");
       return;
@@ -47,9 +43,8 @@ const Login = ({ navigation }: Props) => {
       return;
     }
 
-    console.log(result.data);
-    await AsyncStorage.setItem("user", { username, ...result.data });
-    navigation.navigate("Home");*/
+    await AsyncStorage.setItem("user", JSON.stringify({ username, ...result.data }));
+    navigation.navigate("Home");
   };
 
   useEffect(() => {
