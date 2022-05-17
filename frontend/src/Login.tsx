@@ -84,13 +84,15 @@ const Login = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <View style={tailwind("flex items-center justify-center h-full w-full")}>
-      <Text style={tailwind("text-4xl mb-4")}>Login/Sign Up</Text>
+    <View style={tailwind("flex items-center justify-center h-full w-full bg-[#BEE9E4]")}>
+      <Text style={tailwind("text-4xl mb-4")}>Login or </Text>
+      <Text style={tailwind("text-4xl mb-16")}>Sign Up</Text>
+
       <View style={tailwind("w-2/3")}>
         <TextInput
           placeholder="Username"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-6 text-xl"
+            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-36 text-xl"
           )}
           value={username}
           onChangeText={(text) =>
@@ -101,7 +103,7 @@ const Login = ({ navigation }: Props) => {
         <TextInput
           placeholder="Password"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-4 text-xl"
+            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-2 text-xl"
           )}
           maxLength={20}
           onChangeText={(text) => setPassword(text.replace(/ /g, ""))}

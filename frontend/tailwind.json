@@ -1,42 +1,12 @@
 {
+	"mt-4": {
+		"style": {
+			"marginTop": 16
+		}
+	},
 	"mb-4": {
 		"style": {
 			"marginBottom": 16
-		}
-	},
-	"mb-3": {
-		"style": {
-			"marginBottom": 12
-		}
-	},
-	"mb-8": {
-		"style": {
-			"marginBottom": 32
-		}
-	},
-	"mb-28": {
-		"style": {
-			"marginBottom": 112
-		}
-	},
-	"mb-32": {
-		"style": {
-			"marginBottom": 128
-		}
-	},
-	"mb-48": {
-		"style": {
-			"marginBottom": 192
-		}
-	},
-	"mb-40": {
-		"style": {
-			"marginBottom": 160
-		}
-	},
-	"mb-36": {
-		"style": {
-			"marginBottom": 144
 		}
 	},
 	"mb-6": {
@@ -44,9 +14,44 @@
 			"marginBottom": 24
 		}
 	},
-	"mt-4": {
+	"mb-3": {
 		"style": {
-			"marginTop": 16
+			"marginBottom": 12
+		}
+	},
+	"mb-32": {
+		"style": {
+			"marginBottom": 128
+		}
+	},
+	"mb-36": {
+		"style": {
+			"marginBottom": 144
+		}
+	},
+	"mb-2": {
+		"style": {
+			"marginBottom": 8
+		}
+	},
+	"mb-10": {
+		"style": {
+			"marginBottom": 40
+		}
+	},
+	"mb-5": {
+		"style": {
+			"marginBottom": 20
+		}
+	},
+	"mb-16": {
+		"style": {
+			"marginBottom": 64
+		}
+	},
+	"mb-20": {
+		"style": {
+			"marginBottom": 80
 		}
 	},
 	"flex": {
@@ -110,10 +115,28 @@
 			"backgroundColor": "rgb(59 130 246 / var(--tw-bg-opacity))"
 		}
 	},
-	"bg-[#FEFF65]": {
+	"bg-yellow-500": {
 		"style": {
 			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(254 255 101 / var(--tw-bg-opacity))"
+			"backgroundColor": "rgb(234 179 8 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-[#D86C70]": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(216 108 112 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-[#BEE]": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(187 238 238 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-[#BEE9E4]": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(190 233 228 / var(--tw-bg-opacity))"
 		}
 	},
 	"p-2": {
@@ -136,24 +159,6 @@
 			"paddingBottom": 4
 		}
 	},
-	"py-6": {
-		"style": {
-			"paddingTop": 24,
-			"paddingBottom": 24
-		}
-	},
-	"py-[-6]": {
-		"style": {
-			"paddingTop": -6,
-			"paddingBottom": -6
-		}
-	},
-	"py-2": {
-		"style": {
-			"paddingTop": 8,
-			"paddingBottom": 8
-		}
-	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"
@@ -165,16 +170,16 @@
 			"lineHeight": 28
 		}
 	},
-	"text-4xl": {
-		"style": {
-			"fontSize": 36,
-			"lineHeight": 40
-		}
-	},
 	"text-3xl": {
 		"style": {
 			"fontSize": 30,
 			"lineHeight": 36
+		}
+	},
+	"text-4xl": {
+		"style": {
+			"fontSize": 36,
+			"lineHeight": 40
 		}
 	},
 	"text-white": {
