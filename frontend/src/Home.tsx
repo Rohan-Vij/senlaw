@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { RootStackParamList, UserAuth } from "./config";
 
@@ -30,9 +30,9 @@ const Home = ({ navigation }: Props) => {
   }, []);
 
   return !auth ? <Text style={tailwind("text-xl")}>Loading...</Text> : (
-    <>
-      <Text style={tailwind("text-xl")}>Hello, {auth.username}</Text>
-    </>
+    <View>
+      <Text style={tailwind("text-3xl text-center mt-4")}>Welcome, {auth.username}!</Text>
+    </View>
   );
 };
 

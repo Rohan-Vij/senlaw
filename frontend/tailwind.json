@@ -44,6 +44,11 @@
 			"marginBottom": 24
 		}
 	},
+	"mt-4": {
+		"style": {
+			"marginTop": 16
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -164,6 +169,12 @@
 		"style": {
 			"fontSize": 36,
 			"lineHeight": 40
+		}
+	},
+	"text-3xl": {
+		"style": {
+			"fontSize": 30,
+			"lineHeight": 36
 		}
 	},
 	"text-white": {
