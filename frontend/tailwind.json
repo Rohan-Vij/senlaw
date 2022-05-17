@@ -1,4 +1,9 @@
 {
+	"mt-2": {
+		"style": {
+			"marginTop": 8
+		}
+	},
 	"mb-4": {
 		"style": {
 			"marginBottom": 16
@@ -7,6 +12,11 @@
 	"mb-3": {
 		"style": {
 			"marginBottom": 12
+		}
+	},
+	"mt-4": {
+		"style": {
+			"marginTop": 16
 		}
 	},
 	"flex": {
@@ -95,22 +105,22 @@
 			"textAlign": "center"
 		}
 	},
-	"text-4xl": {
-		"style": {
-			"fontSize": 36,
-			"lineHeight": 40
-		}
-	},
 	"text-xl": {
 		"style": {
 			"fontSize": 20,
 			"lineHeight": 28
 		}
 	},
-	"text-lg": {
+	"text-3xl": {
 		"style": {
-			"fontSize": 18,
-			"lineHeight": 28
+			"fontSize": 30,
+			"lineHeight": 36
+		}
+	},
+	"text-4xl": {
+		"style": {
+			"fontSize": 36,
+			"lineHeight": 40
 		}
 	},
 	"text-white": {
