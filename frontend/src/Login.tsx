@@ -90,7 +90,7 @@ const Login = ({ navigation }: Props) => {
         <TextInput
           placeholder="Username"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-4 text-xl"
+            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-6 text-xl"
           )}
           value={username}
           onChangeText={(text) =>
