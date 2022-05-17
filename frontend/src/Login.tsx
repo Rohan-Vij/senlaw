@@ -84,7 +84,7 @@ const Login = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <View style={tailwind("flex items-center justify-center h-full w-full bg-[#BEE9E4]")}>
+    <View style={tailwind("flex items-center justify-center h-full w-full bg-[#d8ede2]")}>
       <Text style={tailwind("text-4xl mb-4")}>Login or </Text>
       <Text style={tailwind("text-4xl mb-16")}>Sign Up</Text>
 
@@ -92,7 +92,7 @@ const Login = ({ navigation }: Props) => {
         <TextInput
           placeholder="Username"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-36 text-xl"
+            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-3 text-xl"
           )}
           value={username}
           onChangeText={(text) =>

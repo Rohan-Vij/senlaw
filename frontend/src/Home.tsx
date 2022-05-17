@@ -29,9 +29,13 @@ const Home = ({ navigation }: Props) => {
     })();
   }, []);
 
-  return !auth ? <Text style={tailwind("text-xl")}>Loading...</Text> : (
+  return !auth ? (
+    <Text style={tailwind("text-xl")}>Loading...</Text>
+  ) : (
     <View>
-      <Text style={tailwind("text-3xl text-center mt-4")}>Welcome, {auth.username}!</Text>
+      <Text style={tailwind("text-3xl text-center mt-4")}>
+        Welcome, {auth.username}!
+      </Text>
     </View>
   );
 };
