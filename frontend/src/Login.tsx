@@ -76,6 +76,10 @@ const Login = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
+    // TODO: FOR TESTING, REMOVE
+    setUsername("ayush");
+    setPassword("1234");
+
     (async () => {
       if (await AsyncStorage.getItem("user")) {
         navigation.navigate("Login/Sign Up");
@@ -83,10 +87,14 @@ const Login = ({ navigation }: Props) => {
     })();
   }, []);
 
+  // TODO: FOR TESTING, REMOVE
+  useEffect(() => {
+    login();
+  }, [username, password]);
+
   return (
-    <View style={tailwind("flex items-center justify-center h-full w-full bg-[#d8ede2]")}>
-      <Text style={tailwind("text-4xl mb-4")}>Login or </Text>
-      <Text style={tailwind("text-4xl mb-16")}>Sign Up</Text>
+    <View style={tailwind("flex items-center justify-center h-full w-full")}>
+      <Text style={tailwind("text-4xl mb-8")}>Login or Sign Up</Text>
 
       <View style={tailwind("w-2/3")}>
         <TextInput
@@ -105,6 +113,7 @@ const Login = ({ navigation }: Props) => {
           style={tailwind(
             "border-2 border-slate-300 rounded w-full px-2 py-1 mb-2 text-xl"
           )}
+          value={password}
           maxLength={20}
           onChangeText={(text) => setPassword(text.replace(/ /g, ""))}
           secureTextEntry={true}

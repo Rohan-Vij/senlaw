@@ -10,16 +10,24 @@
   margin-bottom: 4rem
 }
 
-.mb-36 {
-  margin-bottom: 9rem
+.mb-3 {
+  margin-bottom: 0.75rem
 }
 
 .mb-2 {
   margin-bottom: 0.5rem
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem
+.mb-8 {
+  margin-bottom: 2rem
+}
+
+.ml-3 {
+  margin-left: 0.75rem
+}
+
+.ml-4 {
+  margin-left: 1rem
 }
 
 .flex {
@@ -30,12 +38,40 @@
   height: 100%
 }
 
+.h-48 {
+  height: 12rem
+}
+
+.h-12 {
+  height: 3rem
+}
+
 .w-full {
   width: 100%
 }
 
 .w-2\/3 {
   width: 66.666667%
+}
+
+.w-11\/12 {
+  width: 91.666667%
+}
+
+.flex-grow {
+  flex-grow: 1
+}
+
+.grow {
+  flex-grow: 1
+}
+
+.flex-row {
+  flex-direction: row
+}
+
+.flex-col {
+  flex-direction: column
 }
 
 .items-center {
@@ -50,8 +86,16 @@
   border-radius: 0.25rem
 }
 
+.rounded-full {
+  border-radius: 9999px
+}
+
 .border-2 {
   border-width: 2px
+}
+
+.border {
+  border-width: 1px
 }
 
 .border-slate-300 {
@@ -59,9 +103,24 @@
   border-color: rgb(203 213 225 / var(--tw-border-opacity))
 }
 
-.bg-\[\#BEE9E4\] {
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity))
+}
+
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity))
+}
+
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.bg-\[\#d8ede2\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(190 233 228 / var(--tw-bg-opacity))
+  background-color: rgb(216 237 226 / var(--tw-bg-opacity))
 }
 
 .bg-blue-500 {
@@ -69,14 +128,24 @@
   background-color: rgb(59 130 246 / var(--tw-bg-opacity))
 }
 
-.bg-\[\#d8edeb\] {
+.bg-neutral-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(216 237 235 / var(--tw-bg-opacity))
+  background-color: rgb(115 115 115 / var(--tw-bg-opacity))
 }
 
-.bg-\[\#d8ede2\] {
+.bg-neutral-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(216 237 226 / var(--tw-bg-opacity))
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity))
+}
+
+.bg-neutral-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity))
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
 .p-2 {
@@ -91,6 +160,11 @@
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 
 .text-center {
