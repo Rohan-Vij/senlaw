@@ -20,8 +20,6 @@ app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 jwt = JWTManager(app)
 
-
-
 client = pymongo.MongoClient(
     "mongodb+srv://rohanvij:P1AzN5IFJahNM7Hr@cluster0.s75ty.mongodb.net"
     "/?retryWrites=true&w=majority")
@@ -222,7 +220,7 @@ def update_lawyer():
     return jsonify({"message": "Success"}), 200
 
 
-@app.route("/lawyers/viewmine")
+@app.route("/lawyers/viewmine", methods=["GET"])
 @jwt_required()
 def viewmine_lawyer():
     """
@@ -237,7 +235,7 @@ def viewmine_lawyer():
     return jsonify({"message": "Success", "posts": posts_find}), 200
 
 
-@app.route("/lawyers/all")
+@app.route("/lawyers/all", methods=["GET"])
 @jwt_required()
 def view_all():
     """
@@ -248,6 +246,34 @@ def view_all():
     posts_find = list(lawyer_posts.find())
 
     return jsonify({"message": "Success", "posts": posts_find}), 200
+
+@app.route("/lawyers/listtags", methods=["GET"])
+def list_tags():
+    """
+    List all tags.
+
+    :return: A list of tags.
+    """
+    return jsonify({"message": "Success", "tags": tag_options}), 200
+
+@app.route("/lawyers/tags")
+@jwt_required()
+def get_by_tags():
+    """
+    View all posts with a certain tag.
+
+    Example: /lawyers/tags?tag=Criminal_Law,Family_Law
+
+    :return: A list of posts.
+    """
+    tag = request.args.getlist("tag")
+
+    posts = []
+
+    for option in tag:
+        posts.append(lawyer_posts.find({"tags": option}))
+
+    return jsonify({"message": "Success", "posts": posts}), 200
 
 
 if __name__ == "__main__":
