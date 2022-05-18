@@ -1,15 +1,19 @@
 import { useTailwind } from "tailwind-rn";
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, LogBox } from "react-native";
 import { useEffect, useState } from "react";
 import { endpoint, RootStackParamList } from "./config";
 import { StackNavigationProp } from "@react-navigation/stack";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { Component } from 'react'
+import { Image } from 'react-native'
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Login/Sign Up"
 >;
+
+
 
 type Props = {
   navigation: ProfileScreenNavigationProp;
@@ -21,6 +25,10 @@ const Login = ({ navigation }: Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const ImagesExample = () => (
+    <Image source = {require('C:\Users\aakri\Documents\senlaw\frontend\src\logo.png')} />
+ )
 
   const login = async () => {
     let result;

@@ -1,5 +1,4 @@
-export const endpoint = "http://192.168.86.25:5000";
-
+export const endpoint = "http://192.168.0.129:19000";
 export type RootStackParamList = {
   Home: undefined;
   "Login/Sign Up": undefined;
