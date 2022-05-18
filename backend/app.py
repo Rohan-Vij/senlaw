@@ -1,9 +1,9 @@
 '''Main entrypoint file for the API.'''
+import json
 from datetime import timedelta
 
 import pymongo
 from bson.objectid import ObjectId
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import (JWTManager, create_access_token,
@@ -21,14 +21,20 @@ app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 jwt = JWTManager(app)
 
 
-# login to db
+
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:jD6t7pWkyUSDgQR@cluster0.s75ty.mongodb.net/"
-    "senlaw?retryWrites=true&w=majority")
+    "mongodb+srv://rohanvij:P1AzN5IFJahNM7Hr@cluster0.s75ty.mongodb.net"
+    "/?retryWrites=true&w=majority")
+
 db = client["senlaw"]
 users = db["users"]
 lawyer_posts = db["lawyer_posts"]
+# load tags
 
+with open('./tags.json', encoding='utf-8') as json_file:
+    data = json.load(json_file)
+
+tag_options = data["tags"]
 # --- User Management ---
 
 
@@ -86,8 +92,7 @@ def signup():
         {"username": username, "password": password}).inserted_id
 
     access_token = create_access_token(identity=str(_id))
-    refresh_token = create_refresh_token(identity=str(_id))
-    return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+    return jsonify(access_token=access_token), 200
 
 
 @app.route("/refresh", methods=["POST"])
@@ -128,14 +133,18 @@ def create_lawyer():
     """
     username = request.json.get("username", None)
     title = request.json.get("title", None)
-    type_of_service = request.json.get("type", None)
+    tags = request.json.get("tags", None)
+    for tag in tags:
+        if tag not in tag_options:
+            return jsonify({"message": "Invalid tag"}), 400
+
     description = request.json.get("description", None)
 
     _id = lawyer_posts.insert_one(
         {
             "username": username,
             "title": title,
-            "service": type_of_service,
+            "tags": tags,
             "description": description
         }).inserted_id
 
@@ -182,7 +191,12 @@ def update_lawyer():
     _id = request.json.get("id", None)
 
     title = request.json.get("title", None)
-    type_of_service = request.json.get("type", None)
+    tags = request.json.get("tags", None)
+
+    for tag in tags:
+        if tag not in tag_options:
+            return jsonify({"message": "Invalid tag"}), 400
+
     description = request.json.get("description", None)
 
     find = lawyer_posts.find({"_id": ObjectId(_id)})
@@ -201,7 +215,7 @@ def update_lawyer():
                                      {"$set": {
                                          "username": username,
                                          "title": title,
-                                         "service": type_of_service,
+                                         "tags": tags,
                                          "description": description}
                                       })
 
@@ -237,4 +251,4 @@ def view_all():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)
