@@ -137,13 +137,15 @@ def create_lawyer():
             return jsonify({"message": "Invalid tag"}), 400
 
     description = request.json.get("description", None)
+    contact = request.json.get("contact", None)
 
     _id = lawyer_posts.insert_one(
         {
             "username": username,
             "title": title,
             "tags": tags,
-            "description": description
+            "description": description,
+            "contact": contact
         }).inserted_id
 
     return jsonify({"message": "Success", "id": _id}), 200
@@ -197,6 +199,8 @@ def update_lawyer():
 
     description = request.json.get("description", None)
 
+    contact = request.json.get("contact", None)
+
     find = lawyer_posts.find({"_id": ObjectId(_id)})
 
     exists = bool(find)
@@ -214,7 +218,8 @@ def update_lawyer():
                                          "username": username,
                                          "title": title,
                                          "tags": tags,
-                                         "description": description}
+                                         "description": description,
+                                         "contact": contact}
                                       })
 
     return jsonify({"message": "Success"}), 200
@@ -256,7 +261,7 @@ def list_tags():
     """
     return jsonify({"message": "Success", "tags": tag_options}), 200
 
-@app.route("/lawyers/tags")
+@app.route("/lawyers/tags", methods=["GET"])
 @jwt_required()
 def get_by_tags():
     """
@@ -277,4 +282,5 @@ def get_by_tags():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)
+    
