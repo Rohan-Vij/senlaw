@@ -20,8 +20,6 @@ app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 jwt = JWTManager(app)
 
-
-
 client = pymongo.MongoClient(
     "mongodb+srv://rohanvij:P1AzN5IFJahNM7Hr@cluster0.s75ty.mongodb.net"
     "/?retryWrites=true&w=majority")
