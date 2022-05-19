@@ -76,21 +76,12 @@ const Login = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    // TODO: FOR TESTING, REMOVE
-    setUsername("ayush");
-    setPassword("1234");
-
     (async () => {
       if (await AsyncStorage.getItem("user")) {
         navigation.navigate("Login/Sign Up");
       }
     })();
   }, []);
-
-  // TODO: FOR TESTING, REMOVE
-  useEffect(() => {
-    //login();
-  }, [username, password]);
 
   return (
     <View
@@ -101,7 +92,7 @@ const Login = ({ navigation }: Props) => {
       <Text style={tailwind("text-4xl mb-8")}>Login or Sign Up</Text>
 
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../assets/icon.png")}
         style={tailwind("h-36 w-36 mb-4")}
       />
 

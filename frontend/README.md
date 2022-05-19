@@ -14,4 +14,20 @@ npm run dev:tailwind # runs the tailwind server
 npm run android # runs the expo server to serve on android
 ```
 
+building:
+
+```ps
+npm run build:tailwind
+# npm install -g eas-cli
+eas build -p android
+# download aab file
+# download https://github.com/google/bundletool/releases/tag/1.10.0
+# rename aab file to "senlaw.aab"
+cd Downloads
+java -jar .\bundletool-all-1.10.0.jar build-apks --bundle=senlaw.aab --output=senlaw.apks --mode=universal
+mv .\senlaw.apks .\senlaw.zip
+# extract and get universal.apk
+# send to phone to install
+```
+
 **THIS HAS ONLY BEEN TESTED ON ANDROID!** (someone test on ios when? I don't have an iphone lol)

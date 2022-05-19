@@ -328,10 +328,16 @@
 			"lineHeight": 24
 		}
 	},
-	"text-sm": {
+	"text-2xl": {
 		"style": {
-			"fontSize": 14,
-			"lineHeight": 20
+			"fontSize": 24,
+			"lineHeight": 32
+		}
+	},
+	"text-lg": {
+		"style": {
+			"fontSize": 18,
+			"lineHeight": 28
 		}
 	},
 	"text-4xl": {
@@ -340,22 +346,16 @@
 			"lineHeight": 40
 		}
 	},
-	"text-2xl": {
-		"style": {
-			"fontSize": 24,
-			"lineHeight": 32
-		}
-	},
 	"text-gray-800": {
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(31 41 55 / var(--tw-text-opacity))"
 		}
 	},
-	"text-slate-500": {
+	"text-slate-800": {
 		"style": {
 			"--tw-text-opacity": 1,
-			"color": "rgb(100 116 139 / var(--tw-text-opacity))"
+			"color": "rgb(30 41 59 / var(--tw-text-opacity))"
 		}
 	},
 	"text-white": {

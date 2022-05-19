@@ -123,7 +123,7 @@ const Home = ({ navigation }: Props) => {
       </Text>
 
       <Text style={tailwind("text-xl text-center mb-4 text-gray-800")}>
-        Pick a lawyer below to contact!
+        Click a lawyer below to contact!
       </Text>
 
       <View
@@ -152,7 +152,7 @@ const Home = ({ navigation }: Props) => {
             </Pressable>
           ))
         ) : (
-          <Text style={tailwind("mr-2 text-base text-gray-800")}>No tags</Text>
+          <Text style={tailwind("mr-2 text-base text-gray-800")}>No categories</Text>
         )}
         <Pressable onPress={() => setTagPickerShown(true)}>
           <View
@@ -165,7 +165,7 @@ const Home = ({ navigation }: Props) => {
               size={16}
               style={tailwind("mr-1")}
             />
-            <Text style={tailwind("text-center text-base")}>Add Tag</Text>
+            <Text style={tailwind("text-center text-base")}>Filter...</Text>
           </View>
         </Pressable>
       </View>
