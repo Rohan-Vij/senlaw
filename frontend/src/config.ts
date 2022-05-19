@@ -1,4 +1,4 @@
-export const endpoint = "http://10.21.122.84:5000";
+export const endpoint = "http://192.168.86.25:5000";
 export type RootStackParamList = {
   Home: undefined;
   "Login/Sign Up": undefined;
@@ -11,8 +11,10 @@ export interface UserAuth {
 }
 
 export interface Lawyer {
+  _id: string;
   username: string;
   title: string;
   tags: string[];
   description: string;
+  contact: string;
 }

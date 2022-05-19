@@ -8,11 +8,36 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
 import Login from "./Login";
 import { RootStackParamList } from "./config";
+import Loading from "./Loading";
+
+import { setCustomText, setCustomTextInput } from "react-native-global-props";
+import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/montserrat";
+import { useEffect } from "react";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
-  return (
+  const [fontsLoaded] = useFonts({
+    Montserrat_400Regular,
+  });
+
+  useEffect(() => {
+    setCustomText({
+      style: {
+        fontFamily: "Montserrat_400Regular",
+      },
+    });
+
+    setCustomTextInput({
+      style: {
+        fontFamily: "Montserrat_400Regular",
+      }
+    })
+  }, [fontsLoaded]);
+
+  return !fontsLoaded ? (
+    <Loading />
+  ) : (
     <TailwindProvider utilities={utilities}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login/Sign Up">

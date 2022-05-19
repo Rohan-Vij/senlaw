@@ -23,21 +23,14 @@ const Home = ({ navigation }: Props) => {
   const tailwind = useTailwind();
   const [auth, setAuth] = useState<null | UserAuth>();
 
-  const [lawyersList, setLawyersList] = useState<undefined | Lawyer[]>(undefined);
-  const [tags, setTags] = useState<undefined | string[]>(undefined);
+  const [lawyersList, setLawyersList] = useState<undefined | Lawyer[]>(
+    undefined
+  );
+  const [tagsList, setTagsList] = useState<undefined | string[]>(undefined);
 
   const [tagsShown, setTagsShown] = useState<string[]>([]);
+  const [lawyersShown, setLawyersShown] = useState<Lawyer[]>([]);
   const [tagPickerShown, setTagPickerShown] = useState(false);
-
-  const getHeaders = (): AxiosRequestConfig<any> => {
-    if (auth === null) throw "Tried to get headers without authentication!";
-    console.log(auth?.access_token);
-    return {
-      headers: {
-        Authorization: "Bearer " + auth?.access_token,
-      },
-    };
-  };
 
   useEffect(() => {
     (async () => {
@@ -61,22 +54,41 @@ const Home = ({ navigation }: Props) => {
         },
       };
 
-      console.log((await axios.get(endpoint + "/lawyers/all", headers)).data.posts);
-
       try {
         setLawyersList(
-          ((await axios.get(endpoint + "/lawyers/all", headers)).data.posts) as Lawyer[]
+          (await axios.get(endpoint + "/lawyers/all", headers)).data
+            .posts as Lawyer[]
         );
       } catch (e) {
         console.error(e);
         return;
       }
 
+      // TODO: remove for testing
+      setLawyersList([
+        {
+          _id: "test",
+          username: "lawyer123",
+          title: "Cool Law Firm Inc",
+          description: "a really really cool lawyer",
+          tags: ["Criminal Law", "Health Law"],
+          contact: "000-000-9999",
+        },
+        {
+          _id: "test2",
+          username: "lawyer1234",
+          title: "REALLY Cool Law Firm Inc",
+          description: "a really really REALLY cool lawyer",
+          tags: ["Real Estate Law", "Tax Law"],
+          contact: "000-000-0000",
+        },
+      ]);
+
       try {
-        setTags(
+        setTagsList(
           (
-            ((await axios.get(endpoint + "/lawyers/listtags", headers)).data
-              .tags) as string[]
+            (await axios.get(endpoint + "/lawyers/listtags", headers)).data
+              .tags as string[]
           ).map((value) => value.replace(/_/g, " "))
         );
       } catch (e) {
@@ -87,23 +99,31 @@ const Home = ({ navigation }: Props) => {
   }, [auth]);
 
   useEffect(() => {
-    console.log("tags", tags);
-  }, [tags]);
-
-  useEffect(() => {
-    console.log(lawyersList);
+    // please the all mighty typescript compiler
+    if (lawyersList)
+      setLawyersShown(lawyersList);
   }, [lawyersList]);
 
   useEffect(() => {
-    //console.log("TAGS SHOWN", tagsShown);
+    if (!lawyersList) return;
+
+    setLawyersShown(
+      lawyersList.filter((lawyer) =>
+        tagsShown.every((tag) => lawyer.tags.includes(tag))
+      )
+    );
   }, [tagsShown]);
 
-  return !auth || !lawyersList || !tags ? (
+  return !auth || !lawyersList || !tagsList ? (
     <Loading />
   ) : (
     <View style={tailwind("flex items-center justify-center h-full w-full")}>
       <Text style={tailwind("text-3xl text-center mt-8 mb-4")}>
         Welcome, {auth.username}!
+      </Text>
+
+      <Text style={tailwind("text-xl text-center mb-4 text-gray-800")}>
+        Pick a lawyer below to contact!
       </Text>
 
       <View
@@ -115,19 +135,24 @@ const Home = ({ navigation }: Props) => {
               onPress={() =>
                 setTagsShown(tagsShown.filter((value) => value !== tag))
               }
+              key={tag}
             >
               <View
                 style={tailwind(
                   "px-2 mr-2 rounded-full border-2 border-gray-300 flex flex-row items-center mb-2"
                 )}
               >
-                <MaterialIcons name={"cancel"} style={tailwind("mr-1")} />
+                <MaterialIcons
+                  name={"cancel"}
+                  size={16}
+                  style={tailwind("mr-1")}
+                />
                 <Text style={tailwind("text-center text-base")}>{tag}</Text>
               </View>
             </Pressable>
           ))
         ) : (
-          <Text style={tailwind("mr-2 text-base")}>No tags</Text>
+          <Text style={tailwind("mr-2 text-base text-gray-800")}>No tags</Text>
         )}
         <Pressable onPress={() => setTagPickerShown(true)}>
           <View
@@ -135,7 +160,11 @@ const Home = ({ navigation }: Props) => {
               "px-2 mr-2 rounded-full border-2 border-gray-300 flex flex-row items-center mb-2 bg-slate-400"
             )}
           >
-            <MaterialIcons name={"add-box"} style={tailwind("mr-1")} />
+            <MaterialIcons
+              name={"add-box"}
+              size={16}
+              style={tailwind("mr-1")}
+            />
             <Text style={tailwind("text-center text-base")}>Add Tag</Text>
           </View>
         </Pressable>
@@ -146,9 +175,13 @@ const Home = ({ navigation }: Props) => {
           <Loading />
         ) : (
           <>
-            {lawyersList.map((lawyer) => (
-              <LawyerComponent lawyer={lawyer} />
-            ))}
+            {lawyersShown.length > 0 ? (
+              lawyersShown.map((lawyer) => <LawyerComponent key={lawyer._id} lawyer={lawyer} />)
+            ) : (
+              <Text style={tailwind("text-xl")}>
+                No lawyers found! Try removing a few tags.
+              </Text>
+            )}
           </>
         )}
       </ScrollView>
@@ -156,7 +189,7 @@ const Home = ({ navigation }: Props) => {
       <TagPicker
         shown={tagPickerShown}
         setShown={setTagPickerShown}
-        items={tags}
+        items={tagsList}
         currentItems={tagsShown}
         setCurrentItems={setTagsShown}
       />

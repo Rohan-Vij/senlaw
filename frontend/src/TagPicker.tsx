@@ -76,6 +76,7 @@ const TagPicker = ({
                   setCurrentItems([...currentItems, tag]);
                 setShown(false);
               }}
+              key={tag}
             >
               <Text style={tailwind("p-2")}>{tag}</Text>
             </Pressable>

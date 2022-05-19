@@ -89,31 +89,38 @@ const Login = ({ navigation }: Props) => {
 
   // TODO: FOR TESTING, REMOVE
   useEffect(() => {
-    login();
+    //login();
   }, [username, password]);
 
   return (
-    <View style={tailwind("flex items-center justify-center h-full w-full")}>
+    <View
+      style={tailwind(
+        "flex items-center justify-center h-full w-full bg-gray-100"
+      )}
+    >
       <Text style={tailwind("text-4xl mb-8")}>Login or Sign Up</Text>
 
-      <Image source={require("../assets/logo.png")} style={tailwind("h-48 w-48 mb-4")} />
+      <Image
+        source={require("../assets/logo.png")}
+        style={tailwind("h-36 w-36 mb-4")}
+      />
 
-      <View style={tailwind("w-2/3")}>
+      <View style={tailwind("w-2/3 rounded p-4 bg-gray-100 bg-slate-300")}>
         <TextInput
           placeholder="Username"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-3 text-xl"
+            "border-2 border-slate-400 rounded w-full px-2 py-1 mb-3 text-xl"
           )}
           value={username}
           onChangeText={(text) =>
-            setUsername(text.replace(/[^a-zA-Z0-9-_]/g, ""))
+            setUsername(text.replace(/[^a-zA-Z0-9-_ ]/g, ""))
           }
           maxLength={20}
         ></TextInput>
         <TextInput
           placeholder="Password"
           style={tailwind(
-            "border-2 border-slate-300 rounded w-full px-2 py-1 mb-2 text-xl"
+            "border-2 border-slate-400 rounded w-full px-2 py-1 mb-2 text-xl"
           )}
           value={password}
           maxLength={20}
@@ -121,16 +128,16 @@ const Login = ({ navigation }: Props) => {
           secureTextEntry={true}
         ></TextInput>
         <Pressable
-          style={tailwind("bg-blue-500 p-2 rounded w-full mb-3")}
+          style={tailwind("bg-orange-700 p-2 rounded w-full mb-3")}
           onPress={login}
         >
-          <Text style={tailwind("text-white text-xl text-center")}>Login</Text>
+          <Text style={tailwind("text-white text-2xl text-center")}>Login</Text>
         </Pressable>
         <Pressable
-          style={tailwind("bg-blue-500 p-2 rounded w-full")}
+          style={tailwind("bg-orange-700 p-2 rounded w-full")}
           onPress={signup}
         >
-          <Text style={tailwind("text-white text-xl text-center")}>
+          <Text style={tailwind("text-white text-2xl text-center")}>
             Sign Up
           </Text>
         </Pressable>
