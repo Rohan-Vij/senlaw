@@ -156,7 +156,7 @@ def create_lawyer():
             "contact": contact
         }).inserted_id
 
-    return jsonify({"message": "Success", "id": _id}), 200
+    return jsonify({"message": "Success", "id": str(_id)}), 200
 
 
 @app.route("/lawyers/delete", methods=["DELETE"])
