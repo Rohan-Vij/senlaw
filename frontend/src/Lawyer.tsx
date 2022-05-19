@@ -8,7 +8,7 @@ const LawyerComponent = ({ lawyer }: { lawyer: Lawyer }) => {
 
   return (
     <Pressable
-      style={tailwind("w-full bg-neutral-100 rounded-md p-4 mb-4")}
+      style={tailwind("w-full bg-neutral-100 rounded-md p-4 pb-2 mb-4")}
       onPress={() => Linking.openURL(`tel:${lawyer.contact}`)}
     >
       <Text style={tailwind("text-2xl mb-1")}>
@@ -21,12 +21,12 @@ const LawyerComponent = ({ lawyer }: { lawyer: Lawyer }) => {
         <MaterialIcons name="call" style={tailwind("mr-2")} />
         <Text style={tailwind("text-lg")}>{lawyer.contact}</Text>
       </View>
-      <View style={tailwind("flex flex-row mb-1")}>
+      <View style={tailwind("flex flex-row flex-wrap mb-1")}>
         {lawyer.tags.map((tag) => (
           <Text
             key={tag}
             style={tailwind(
-              "border border-gray-600 rounded-full px-2 mr-2 text-center text-lg"
+              "border border-gray-600 rounded-full px-2 mr-2 text-center text-lg mb-2"
             )}
           >
             {tag}

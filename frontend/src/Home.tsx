@@ -56,33 +56,18 @@ const Home = ({ navigation }: Props) => {
 
       try {
         setLawyersList(
-          (await axios.get(endpoint + "/lawyers/all", headers)).data
-            .posts as Lawyer[]
+          (
+            (await axios.get(endpoint + "/lawyers/all", headers)).data
+              .posts as Lawyer[]
+          ).map((lawyer) => ({
+            ...lawyer,
+            tags: lawyer.tags.map((tag) => tag.replace(/_/g, " ")),
+          }))
         );
       } catch (e) {
         console.error(e);
         return;
       }
-
-      // TODO: remove for testing
-      setLawyersList([
-        {
-          _id: "test",
-          username: "lawyer123",
-          title: "Cool Law Firm Inc",
-          description: "a really really cool lawyer",
-          tags: ["Criminal Law", "Health Law"],
-          contact: "000-000-9999",
-        },
-        {
-          _id: "test2",
-          username: "lawyer1234",
-          title: "REALLY Cool Law Firm Inc",
-          description: "a really really REALLY cool lawyer",
-          tags: ["Real Estate Law", "Tax Law"],
-          contact: "000-000-0000",
-        },
-      ]);
 
       try {
         setTagsList(
@@ -100,8 +85,7 @@ const Home = ({ navigation }: Props) => {
 
   useEffect(() => {
     // please the all mighty typescript compiler
-    if (lawyersList)
-      setLawyersShown(lawyersList);
+    if (lawyersList) setLawyersShown(lawyersList);
   }, [lawyersList]);
 
   useEffect(() => {
@@ -152,7 +136,9 @@ const Home = ({ navigation }: Props) => {
             </Pressable>
           ))
         ) : (
-          <Text style={tailwind("mr-2 text-base text-gray-800")}>No categories</Text>
+          <Text style={tailwind("mr-2 text-base text-gray-800")}>
+            No categories
+          </Text>
         )}
         <Pressable onPress={() => setTagPickerShown(true)}>
           <View
@@ -176,7 +162,9 @@ const Home = ({ navigation }: Props) => {
         ) : (
           <>
             {lawyersShown.length > 0 ? (
-              lawyersShown.map((lawyer) => <LawyerComponent key={lawyer._id} lawyer={lawyer} />)
+              lawyersShown.map((lawyer) => (
+                <LawyerComponent key={lawyer._id} lawyer={lawyer} />
+              ))
             ) : (
               <Text style={tailwind("text-xl")}>
                 No lawyers found! Try removing a few tags.

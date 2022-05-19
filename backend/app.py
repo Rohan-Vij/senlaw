@@ -258,6 +258,9 @@ def view_all():
     """
     posts_find = list(lawyer_posts.find())
 
+    for post in posts_find:
+        post["_id"] = str(post["_id"])
+
     return jsonify({"message": "Success", "posts": posts_find}), 200
 
 @app.route("/lawyers/listtags", methods=["GET"])
