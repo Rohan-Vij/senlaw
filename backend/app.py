@@ -1,27 +1,35 @@
 '''Main entrypoint file for the API.'''
 import json
+import os
 from datetime import timedelta
 
 import pymongo
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import (JWTManager, create_access_token,
                                 create_refresh_token, get_jwt_identity,
                                 jwt_required)
 
+# loading env variables
+load_dotenv()
+
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 # create app & register login manager
 app = Flask(__name__)
 CORS(app)
 
-app.config["SECRET_KEY"] = "fcd6a76a409c0c785074f63d617b16b0a5a148534c1dbb33"
+app.config["SECRET_KEY"] = SECRET_KEY
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
 jwt = JWTManager(app)
 
 client = pymongo.MongoClient(
-    "mongodb+srv://rohanvij:P1AzN5IFJahNM7Hr@cluster0.s75ty.mongodb.net"
+    f"mongodb+srv://rohanvij:{DB_PASSWORD}P1AzN5IFJahNM7Hr@cluster0.s75ty.mongodb.net"
     "/?retryWrites=true&w=majority")
 
 db = client["senlaw"]
@@ -283,4 +291,3 @@ def get_by_tags():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
-    
