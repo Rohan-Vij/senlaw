@@ -30,7 +30,7 @@ As Heroku is only intended to essentially deploy the root of a GitHub repository
     1. `cd backend`
     2. `git add .`
     3. `git commit -m "Commit message"`
-6. Now, when pushing, MAKE SURE you add the `--force option`: `git push -u heroku master --force`
+6. Now, when pushing, MAKE SURE you add the `--force` option: `git push -u heroku master --force`
 7. An error **will** occur - ignore that for now
 8. Run `cd ..` to return to the parent directory
 9. Once again, run `git subtree push --prefix backend heroku master`
