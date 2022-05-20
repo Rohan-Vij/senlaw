@@ -25,16 +25,17 @@ As Heroku is only intended to essentially deploy the root of a GitHub repository
 1. Install the Heroku CLI
 2. Run `heroku login`
 3. Run `heroku git:remote -a senlaw-api`
-4. At the root directory (containing both the backend and frontend), run `git subtree push --prefix backend heroku master`
-5. `cd` into the `backend` directory and run some of your usual commands:
+4. Run `git remote rename heroku heroku-api`
+5. At the root directory (containing both the backend and frontend), run `git subtree push --prefix backend heroku-api master`
+6. `cd` into the `backend` directory and run some of your usual commands:
     1. `cd backend`
     2. `git add .`
     3. `git commit -m "Commit message"`
-6. Now, when pushing, MAKE SURE you add the `--force` option: `git push -u heroku master --force`
-7. An error **will** occur - ignore that for now
-8. Run `cd ..` to return to the parent directory
-9. Once again, run `git subtree push --prefix backend heroku master`
-10. Click on the application link provided. You're done!
+7. Now, when pushing, MAKE SURE you add the `--force` option: `git push -u heroku-api master --force`
+8. An error **will** occur - ignore that for now
+9. Run `cd ..` to return to the parent directory
+10. Once again, run `git subtree push --prefix backend heroku-api master`
+11. Click on the application link provided. You're done!
 
 #### Adding Heroku Environment Variables
 Referencing the variables from your `.env` file, set variables by:
