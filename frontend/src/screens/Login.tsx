@@ -92,7 +92,7 @@ const Login = ({ navigation }: Props) => {
       <Text style={tailwind("text-4xl mb-8")}>Login or Sign Up</Text>
 
       <Image
-        source={require("../assets/icon.png")}
+        source={require("../../assets/icon.png")}
         style={tailwind("h-36 w-36 mb-4")}
       />
 

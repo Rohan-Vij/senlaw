@@ -1,0 +1,33 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "backend",
+      "description": "Runs the python backend.",
+      "commands": [
+        "cd ./backend",
+        "venv/Scripts/activate",
+        "python ./app.py"
+      ]
+    },
+    {
+      "name": "emulator",
+      "description": "Runs the first android emulator it finds after listing all of them.",
+      "command": "emulator -avd $($(emulator -list-avds).Split(\"`n\")[0])"
+    },
+    {
+      "name": "tailwind",
+      "description": "Runs the development tailwind server.",
+      "commands": ["cd ./frontend", "npm run dev:tailwind"]
+    },
+    {
+      "name": "android",
+      "description": "Runs the android server (expo).",
+      "commands": [
+        "cd ./frontend",
+        "npm run android"
+      ],
+      "focus": true
+    }
+  ]
+}

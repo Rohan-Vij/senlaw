@@ -1,2 +1,5 @@
 .idea
-.vscode
+.vscode/*
+
+# https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals
+!.vscode/terminals.json
