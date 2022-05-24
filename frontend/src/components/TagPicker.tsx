@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, TextInput, ScrollView, Pressable } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useTailwind } from "tailwind-rn/dist";
-import { filterTags } from "./util";
+import { filterTags } from "../util";
 
 const TagPicker = ({
   shown,

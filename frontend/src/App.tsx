@@ -5,10 +5,10 @@ import utilities from "../tailwind.json";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "./Home";
-import Login from "./Login";
+import Home from "./screens/Home";
+import Login from "./screens/Login";
 import { RootStackParamList } from "./config";
-import Loading from "./Loading";
+import Loading from "./components/Loading";
 
 import { setCustomText, setCustomTextInput } from "react-native-global-props";
 import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/montserrat";

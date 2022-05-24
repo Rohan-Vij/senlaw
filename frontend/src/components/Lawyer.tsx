@@ -1,6 +1,6 @@
 import { View, Text, Pressable, Linking } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
-import { Lawyer } from "./config";
+import { Lawyer } from "../config";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const LawyerComponent = ({ lawyer }: { lawyer: Lawyer }) => {

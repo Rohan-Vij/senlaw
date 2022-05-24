@@ -1,7 +1,7 @@
 import { useTailwind } from "tailwind-rn";
 import { View, Text, TextInput, Pressable, Image } from "react-native";
 import { useEffect, useState } from "react";
-import { endpoint, RootStackParamList } from "./config";
+import { endpoint, RootStackParamList } from "../config";
 import { StackNavigationProp } from "@react-navigation/stack";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";

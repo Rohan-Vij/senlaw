@@ -3,11 +3,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
-import { endpoint, Lawyer, RootStackParamList, UserAuth } from "./config";
+import { endpoint, Lawyer, RootStackParamList, UserAuth } from "../config";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Loading from "./Loading";
-import LawyerComponent from "./Lawyer";
-import TagPicker from "./TagPicker";
+import Loading from "../components/Loading";
+import LawyerComponent from "../components/Lawyer";
+import TagPicker from "../components/TagPicker";
 import axios, { AxiosRequestConfig } from "axios";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
