@@ -13,6 +13,7 @@ import Loading from "./components/Loading";
 import { setCustomText, setCustomTextInput } from "react-native-global-props";
 import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { useEffect } from "react";
+import LawyerScreen from "./screens/Lawyer";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -43,6 +44,7 @@ const App = () => {
         <Stack.Navigator initialRouteName="Login/Sign Up">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login/Sign Up" component={Login} />
+          <Stack.Screen name="Lawyer" component={LawyerScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </TailwindProvider>

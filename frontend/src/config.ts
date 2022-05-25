@@ -4,6 +4,7 @@ export const endpoint = "http://192.168.86.25:5000" /*"https://senlaw-api.heroku
 export type RootStackParamList = {
   Home: undefined;
   "Login/Sign Up": undefined;
+  Lawyer: { postId: string; }
 };
 
 export interface UserAuth {

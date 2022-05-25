@@ -247,6 +247,14 @@ def viewmine_lawyer():
 
     return jsonify({"message": "Success", "posts": posts_find}), 200
 
+@app.route("/lawyers/<post_id>")
+@jwt_required()
+def view_lawyer_post(post_id):
+    post = lawyer_posts.find_one({"_id": ObjectId(post_id)})
+    post["_id"] = str(post["_id"])
+
+    return jsonify({"message": "Success", "post": post})
+
 
 @app.route("/lawyers/all", methods=["GET"])
 @jwt_required()
