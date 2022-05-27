@@ -250,6 +250,13 @@ def viewmine_lawyer():
 @app.route("/lawyers/<post_id>")
 @jwt_required()
 def view_lawyer_post(post_id):
+    """
+    View a specific lawyer post.
+
+    :param post_id: The ID of the post to retrieve.
+
+    :return: A lawyer post.
+    """
     post = lawyer_posts.find_one({"_id": ObjectId(post_id)})
     post["_id"] = str(post["_id"])
 
