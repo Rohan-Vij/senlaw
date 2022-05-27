@@ -1,5 +1,5 @@
 // TODO: for dev only, change back
-export const endpoint = "http://192.168.86.25:5000" /*"https://senlaw-api.herokuapp.com/"*/;
+export const endpoint = "https://senlaw-api.herokuapp.com/";
 
 export type RootStackParamList = {
   Home: undefined;
